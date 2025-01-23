@@ -1,8 +1,11 @@
 import Image from "next/image";
-import Navbar from "./components/navbar.tsx";
-import SocialMedia from "./components/socialMedia.tsx";
+import Navbar from "./components/navbar";
+import SocialMedia from "./components/socialMedia";
+import { promises as fs } from 'fs';
 
-export default function Home() {
+export default async function Home() {
+  const file = await fs.readFile(process.cwd() + '/src/app/data.json', 'utf-8');
+  const data = JSON.parse(file);
   return (
     <>
       <Navbar />
@@ -63,7 +66,18 @@ export default function Home() {
           </div>
         </article>
         <article className="h-screen bg-[#303F51]">
-          <h1 className="text-5xl text-[#DDD3C2]">Utdanning</h1>
+          <h1 className="text-5xl text-[#DDD3C2]"><strong>Utdanning</strong></h1>
+          <h6 className="text-xl text-[#DDD3C2]">Frontend- og mobilutvikling</h6>
+          <h6 className="text-xl text-[#DDD3C2]">Barne- og ungdomsarbeider</h6>
+        </article>
+        <article className="h-screen bg-[#DDD3C2]">
+        <h1 className="text-5xl text-[#303F51]"><strong>Arbeid</strong></h1>
+        <h6 className="text-xl text-[#303F51]">Student assistent</h6>
+        <h6 className="text-xl text-[#303F51]">Pedagog medhjelper</h6>
+        <h6 className="text-xl text-[#303F51]">Barne- og ungdomsarbeider</h6>
+        </article>
+        <article className="h-screen bg-[#303F51]">
+        <h1 className="text-5xl text-[#DDD3C2]"><strong>Personlige prosjekter</strong></h1>
         </article>
       </main>
     </>
