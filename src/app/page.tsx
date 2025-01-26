@@ -1,11 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Navbar from "./components/navbar";
 import SocialMedia from "./components/socialMedia";
-import { promises as fs } from 'fs';
+import EducationDescription from "./components/educationDescription";
+import { useState } from "react";
 
-export default async function Home() {
-  const file = await fs.readFile(process.cwd() + '/src/app/data.json', 'utf-8');
-  const data = JSON.parse(file);
+export default function Home() {
+  const [category, setCategory] = useState(0);
+
   return (
     <>
       <Navbar />
@@ -66,18 +69,33 @@ export default async function Home() {
           </div>
         </article>
         <article className="h-screen bg-[#303F51]">
-          <h1 className="text-5xl text-[#DDD3C2]"><strong>Utdanning</strong></h1>
-          <h6 className="text-xl text-[#DDD3C2]">Frontend- og mobilutvikling</h6>
+          <h1 className="text-5xl text-[#DDD3C2]">
+            <strong>Utdanning</strong>
+          </h1>
+          <h6 className="text-xl text-[#DDD3C2]">
+            Frontend- og mobilutvikling
+          </h6>
+          <div className="flex flex-row text-[#DDD3C2]">
+            <div className="flex flex-col">
+              <button>Første år</button>
+              <button>Andre år</button>
+              <button>Tredje år</button>
+            </div>
+          </div>
           <h6 className="text-xl text-[#DDD3C2]">Barne- og ungdomsarbeider</h6>
         </article>
         <article className="h-screen bg-[#DDD3C2]">
-        <h1 className="text-5xl text-[#303F51]"><strong>Arbeid</strong></h1>
-        <h6 className="text-xl text-[#303F51]">Student assistent</h6>
-        <h6 className="text-xl text-[#303F51]">Pedagog medhjelper</h6>
-        <h6 className="text-xl text-[#303F51]">Barne- og ungdomsarbeider</h6>
+          <h1 className="text-5xl text-[#303F51]">
+            <strong>Arbeid</strong>
+          </h1>
+          <h6 className="text-xl text-[#303F51]">Student assistent</h6>
+          <h6 className="text-xl text-[#303F51]">Pedagog medhjelper</h6>
+          <h6 className="text-xl text-[#303F51]">Barne- og ungdomsarbeider</h6>
         </article>
         <article className="h-screen bg-[#303F51]">
-        <h1 className="text-5xl text-[#DDD3C2]"><strong>Personlige prosjekter</strong></h1>
+          <h1 className="text-5xl text-[#DDD3C2]">
+            <strong>Personlige prosjekter</strong>
+          </h1>
         </article>
       </main>
     </>
