@@ -3,11 +3,23 @@
 import Image from "next/image";
 import Navbar from "./components/navbar";
 import SocialMedia from "./components/socialMedia";
-import EducationDescription from "./components/educationDescription";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { EducationData } from "@/pages/api/education";
 
 export default function Home() {
-  const [category, setCategory] = useState(0);
+  // const [category, setCategory] = useState("");
+  const [educationData, setEducationData] = useState<EducationData>()
+  
+  useEffect(() => {
+    handleEducationClick(0)
+  }, [])
+
+  const handleEducationClick = async (educationId: number) => {
+    const response = await fetch(`api/education?id=${educationId}`, {
+      method: "GET"
+    });
+    setEducationData(await response.json())
+  }
 
   return (
     <>
@@ -72,17 +84,23 @@ export default function Home() {
           <h1 className="text-5xl text-[#DDD3C2]">
             <strong>Utdanning</strong>
           </h1>
-          <h6 className="text-xl text-[#DDD3C2]">
-            Frontend- og mobilutvikling
-          </h6>
+          <h6 className="text-xl text-[#DDD3C2]">Frontend- og mobilutvikling</h6>
           <div className="flex flex-row text-[#DDD3C2]">
-            <div className="flex flex-col">
-              <button>Første år</button>
-              <button>Andre år</button>
-              <button>Tredje år</button>
+            <div className="flex flex-col w-1/3">
+              <button onClick={() => handleEducationClick(0)}>Første år</button>
+              <button onClick={() => handleEducationClick(1)}>Andre år</button>
+              <button onClick={() => handleEducationClick(2)}>Tredje år</button>
             </div>
+            {/* Conditional rendering */}
+            {educationData ? <p className="w-2/3">{educationData.content}</p> : ""}
           </div>
           <h6 className="text-xl text-[#DDD3C2]">Barne- og ungdomsarbeider</h6>
+          <div className="flex flex-row text-[#DDD3C2]">
+            <div className="flex flex-col w-1/3">
+            <button onClick={() => handleEducationClick(3)}>Skole</button>
+            <button onClick={() => handleEducationClick(4)}>Læreplass</button>
+            </div>
+          </div>
         </article>
         <article className="h-screen bg-[#DDD3C2]">
           <h1 className="text-5xl text-[#303F51]">
